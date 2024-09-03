@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { alpha, AppBar, Box, Button, IconButton, InputBase, Link, styled, Toolbar, Typography } from "@mui/material";
 
 export default function Home() {
   return (
@@ -89,7 +90,32 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+        {/* <a
+          href=""
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button variant="outlined">Outlined</Button>
+        </a> */}
+        <Link href="/hello">Dashboard</Link>
       </div>
     </main>
   );
 }
+
+// export default function Page() {
+//   return (
+//     // <><h1>Hello, Next.js!</h1><div>Coba</div></>
+//     <main>
+//       <h1> Hello</h1>
+//       <div>Coba</div>
+//       <div>dengan</div>
+//       <ButtonUsage/>
+//     </main>
+//   );
+// }
+// export function ButtonUsage() {
+//   return <Button variant="contained">Hello world</Button>;
+// }
+
