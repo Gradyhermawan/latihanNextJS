@@ -13,17 +13,16 @@
 // import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 'use client'
-import { AppBar, Avatar, Box, Button, Container, IconButton, Link, Menu, MenuItem, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, colors, Container, Divider, Drawer, IconButton, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-
-
-
+import Reorder from '@mui/icons-material/Reorder';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  // const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -46,7 +45,12 @@ function ResponsiveAppBar() {
   const countClickHandler = () => {
       setCountClick(countClick + 1);
   };
- 
+  const navbarClick = () => {
+    // navigate('mobil'); 
+    alert("as")
+    window.location.href = 'mobil'
+
+  };
   useEffect(()=>{
     if(countClick>19){
         setMobil("Kijang")
@@ -60,6 +64,39 @@ function ResponsiveAppBar() {
     matkul : ["FPW", "Data Mining", "Machine Learning"]
     }
     function Welcome(props:any) {return <h1>Hello, {props.name}</h1>;}
+
+
+    const [open, setOpen] = useState(true);
+
+    const toggleDrawer = (newOpen: boolean) => () => {
+      setOpen(newOpen);
+    };
+
+
+    const DrawerList = (
+      <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+        <List>
+          {['Buku', 'Sepatu', 'Baju'].map((text, index) => (
+            <ListItem key={text} onClick={() => navbarClick()} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text}/>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['Mobil', 'Motor', 'Truk'].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    );
+  
   return (
     <main>
     <AppBar position="static">
@@ -84,7 +121,15 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Button onClick={toggleDrawer(true)} >
+            <Reorder sx={{ display: { xs: 'flex', md: 'none' }}} style={{color:"white"}} ></Reorder>
+          </Button>
+
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
