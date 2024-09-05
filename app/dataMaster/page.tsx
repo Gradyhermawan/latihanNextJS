@@ -1,10 +1,9 @@
 'use client'
-import { AppBar, Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-// import * as React from 'react';
-import Mobil from '../kayu/page';
+import { AppBar, Box, Button, Container, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Kayu from '../kayu/page';
 import { useEffect, useState } from 'react';
 import Sepatu from '../sepatu/page';
+import Link from 'next/link';
 
 export default function BasicTable() {
     const [open, setOpen] = useState(true);
@@ -13,6 +12,7 @@ export default function BasicTable() {
         setOpen(newOpen);
     };
     const [judul, setJudul] = useState("kayu");
+    const [isiTable, setTable] = useState(<Kayu/>);
     const navbarClick = (text:string) => {
         setJudul(text);
         if(text=="Kayu"){
@@ -21,8 +21,6 @@ export default function BasicTable() {
             setTable(<Sepatu></Sepatu>);
         }
     };
-    
-    const [isiTable, setTable] = useState(<Kayu></Kayu>);
 
 return (
     <>
@@ -42,7 +40,14 @@ return (
             </div>
             <div>
                 <Container>
-                    <h1>{judul}</h1>
+                    <div style={{display:"flex", marginBottom:"10px"}}>
+                        <div style={{marginRight:"10px"}}>
+                            <h1>{judul.toUpperCase()}</h1>
+                        </div>
+                        <div>
+                            <Link href={judul.toLowerCase()+"/create"}><Button variant="contained" style={{color:"white",border:"1px solid white",backgroundColor:"black"}}>Create</Button></Link>
+                        </div>
+                    </div>
                     {isiTable}
                 </Container>
             </div>
